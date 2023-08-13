@@ -36,6 +36,8 @@ Route::get('/Dashobard/Product/Index',[DashProController::class , "Index"]);
 Route::get('/Dashobard/Product/Addd',[DashProController::class , "Add"]);
 Route::get('/Dashobard/Product/AddPost',[DashProController::class , "AddPost"]);
 
+Route::get('/Dashobard/Product/AddPost',[DashProController::class , "AddPost"]);
+
 
 
 // Route::get('/Dashobard/Product/Index',[DashProController::class , "Index"]);
