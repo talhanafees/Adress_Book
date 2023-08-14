@@ -8,7 +8,6 @@ class DashboardController extends Controller
 {
     public function Index(){
         return View('Dashboard.Index');
-
     }
 
 

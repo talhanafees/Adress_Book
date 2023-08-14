@@ -2,75 +2,73 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class DashProController extends Controller
+class DashCatController extends Controller
 {
     public function Index()
     {
-        $products = Product::all();
-        return View('Dashboard.Product.Index', compact('products'));
+        $categories = category::all();
+        return View('Dashboard.Category.Index', compact('categories'));
     }
-
 
 
     // ______________ Add ______________
     public function Add()
     {
-        $categories = category::all();
-        return View('Dashboard.Product.Add',compact('categories'));
+        return View('Dashboard.Category.Add');
     }
 
     public function AddPost(Request $req)
     {
         $req->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'categoryId' => 'required', // Assuming 'categories' is your categories table name
         ]);
-    
 
         $mediaName = "No-image.png";
         // ____ Upload Media ____
-        $baseUrl = 'Images/Product/';
+        $baseUrl = 'Images/Category/';
 
         if ($req->hasFile('image')) {
+            // Delete the old image file if it exists
             $img = $req->file('image');
             $mediaName = time() . '_' . $img->getClientOriginalName();
             $img->move(public_path($baseUrl), $mediaName); // Use public_path() to get the correct base path
             $mediaName = '/' . $baseUrl . $mediaName;
         }
-        $product = new Product();
-        $product->name = $req->name;
-        $product->price = $req->price;
-        $product->description = $req->description;
-        $product->image = $mediaName;
-        $product->categoryId = $req->categoryId;
+        $category = new Category();
+        $category->name = $req->name;
+        $category->description = $req->description;
+        $category->image = $mediaName;
 
-        $product->save();
+        $category->save();
 
-        return Redirect('/Dashhoard/Product/Index');
+        return Redirect('/Dashhoard/Category/Index');
     }
 
 
     // ______________ Edit ______________
     public function Edit($id)
     {
-        $product = product::find($id);
-        $categories = category::all();
-        return View('Dashboard.Product.Edit', compact('product','categories'));
+        $category = category::find($id);
+        return View('Dashboard.Category.Edit', compact('category'));
     }
 
     public function EditPost(Request $req, $id)
     {
-        $product = Product::find($id);
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
 
-        if (!$product) {
+        $category = category::find($id);
+
+        if (!$category) {
             return Redirect::back()->with('error', 'Product not found.');
         }
 
@@ -80,13 +78,13 @@ class DashProController extends Controller
         ]);
 
         // ____ Upload Media ____
-        $baseUrl = 'Images/product/';
-        $mediaName = $product->image;
+        $baseUrl = 'Images/Category/';
+        $mediaName = $category->image;
 
         if ($req->hasFile('image')) {
             // Delete the old image file if it exists
-            if (file_exists(public_path($product->image))) {
-                unlink(public_path($product->image));
+            if (file_exists(public_path($category->image))) {
+                unlink(public_path($category->image));
             }
             $img = $req->file('image');
             $mediaName = time() . '_' . $img->getClientOriginalName();
@@ -94,28 +92,25 @@ class DashProController extends Controller
             $mediaName = '/' . $baseUrl . $mediaName;
         }
 
-        $product->name = $req->name;
-        $product->price = $req->price;
-        $product->description = $req->description;
-        $product->image = $mediaName;
-        $product->categoryId = $req->categoryId;
+        $category->name = $req->name;
+        $category->description = $req->description;
+        $category->image =  $mediaName;
 
-        $product->save();
+        $category->save();
 
-        return Redirect('/Dashhoard/Product/Index');
+        return Redirect('/Dashhoard/Category/Index');
     }
 
 
     // ______________ Delete ______________
     public function Delete($id)
     {
-        $Product = Product::find($id);
-        if (file_exists(public_path($Product->image))) {
-            unlink(public_path($Product->image));
+        $category = category::find($id);
+        if (file_exists(public_path($category->image))) {
+            unlink(public_path($category->image));
         }
-        $Product->delete();
+        $category->delete();
 
-        return Redirect('/Dashhoard/Product/Index');
+        return Redirect('/Dashhoard/Category/Index');
     }
-    
 }

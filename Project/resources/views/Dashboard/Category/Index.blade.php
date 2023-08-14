@@ -10,11 +10,10 @@
                             <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
-                                        <h2 class="">Products</h2>
+                                        <h2 class="">Category</h2>
                                     </div>
                                     <div>
-                                        <a href="{{ url('/Dashhoard/Product/Add') }}"
-                                            class="btn btn-primary text-white mb-0 me-5" type="button">
+                                        <a href="{{url('/Dashhoard/Category/Add')}}" class="btn btn-primary text-white mb-0 me-5" type="button">
                                             <i class="mdi mdi-account-plus"></i>Add new
                                         </a>
                                     </div>
@@ -30,8 +29,6 @@
                                                     Id
                                                 </th>
                                                 <th>name</th>
-                                                <th>price</th>
-                                                <th>category</th>
                                                 <th>action</th>
                                             </tr>
                                         </thead>
@@ -39,34 +36,28 @@
                                             @php
                                                 $count = 0;
                                             @endphp
-                                            @foreach ($products as $item)
+                                            @foreach ($categories as $item)
                                                 @php
                                                     $count++;
                                                 @endphp
                                                 <tr>
                                                     <td>
-                                                        {{ $count }}
+                                                        {{$count}}
                                                     </td>
                                                     <td>
-                                                        {{ $item->id }}
+                                                        {{$item->id}}
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex ">
-                                                            <img src="{{ $item->image }}" alt="">
+                                                        <div class="d-flex">
+                                                            <img src="{{$item->image}}" alt="">
                                                             <div>
-                                                                <h6>{{ $item->name }}</h6>
+                                                                <h6>{{$item->name}}</h6>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {{ $item->price }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->categoryId }}
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{url('/Dashhoard/Product/Edit')}}/{{$item->id}}"  class="btn btn-sm btn-success">Edit</a>
-                                                        <a href="{{url('/Dashhoard/Product/Delete')}}/{{$item->id}}" class="btn btn-sm btn-danger">Delete</a>
+                                                        <a href="{{url('/Dashhoard/Category/Edit')}}/{{$item->id}}"  class="btn btn-sm btn-success">Edit</a>
+                                                        <a href="{{url('/Dashhoard/Category/Delete')}}/{{$item->id}}" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

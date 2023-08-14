@@ -10,14 +10,14 @@
                             <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
-                                        <h2 class="">Products</h2>
+                                        <h2 class="">Users</h2>
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         <a href="{{ url('/Dashhoard/Product/Add') }}"
                                             class="btn btn-primary text-white mb-0 me-5" type="button">
                                             <i class="mdi mdi-account-plus"></i>Add new
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="table-responsive  mt-1">
                                     <table class="table select-table">
@@ -30,16 +30,16 @@
                                                     Id
                                                 </th>
                                                 <th>name</th>
-                                                <th>price</th>
-                                                <th>category</th>
-                                                <th>action</th>
+                                                <th>email</th>
+                                                <th>role</th>
+                                                <th>Created At</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php
                                                 $count = 0;
                                             @endphp
-                                            @foreach ($products as $item)
+                                            @foreach ($users as $item)
                                                 @php
                                                     $count++;
                                                 @endphp
@@ -59,14 +59,13 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {{ $item->price }}
+                                                        {{ $item->email }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->categoryId }}
+                                                        {{ $item->role==1 ?"Admin":"User" }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{url('/Dashhoard/Product/Edit')}}/{{$item->id}}"  class="btn btn-sm btn-success">Edit</a>
-                                                        <a href="{{url('/Dashhoard/Product/Delete')}}/{{$item->id}}" class="btn btn-sm btn-danger">Delete</a>
+                                                        {{ $item->created_at }}
                                                     </td>
                                                 </tr>
                                             @endforeach
