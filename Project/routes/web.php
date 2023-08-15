@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientProController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashProController;
 use App\Http\Controllers\RegistrationController;
@@ -25,27 +27,31 @@ use Illuminate\Support\Facades\Route;
 
 
 
+//_______________________________________ Auth _____________________________________
+Route::get('/Login',[RegistrationController::class,'Login']);
+Route::Post('/LoginPost',[RegistrationController::class,'LoginPost']);
+
+Route::get('/SignUp',[RegistrationController::class,'Signup']);
+Route::Post('/SignUpPost',[RegistrationController::class,'SignupPost']);
+    
+Route::get('/LogOut',[RegistrationController::class,'LogOut']);
 
 
-//_______________________________________ Client Dashboard_____________________________________
 
+
+//_______________________________________ Client Dashboard _____________________________________
+
+//_______ home ___
 Route::get('/',[ClientController::class ,"Index"]);
 
-// login
+//_______ Products ___
+Route::get('/Product/Index',[ClientProController::class ,"Index"]);
+Route::get('/Product/Detail/{id}',[ClientProController::class ,"Detail"]);
 
-
-Route::get('/Auth/login',[RegistrationController::class , "login"]);
-
-// Signup
-
-Route::get('/Auth/signup',[RegistrationController::class,"signup"]);
+Route::get('/ContactUs',[ContactUsController::class,'Index']);
 
 
 
-
-
-
-// ________________________________________ Dashboard __________________________________
 // ________________________________________ Dashboard __________________________________
 Route::get('/Dashboard/Index',[DashboardController::class , "Index"]);
 

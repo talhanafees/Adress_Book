@@ -1,102 +1,46 @@
-@extends('Client.Index')
+@extends('Layouts.frontend')
 
 @section('front')
+    <!-- shop section -->
 
-
-<section class="slider_section">
-    <div class="slider_container">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Welcome To Our <br>
-                      Gift Shop
-                    </h1>
-                    <p>
-                      Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.
-                    </p>
-                    <a href="">
-                      Contact Us
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-5 ">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="" />
-                  </div>
-                </div>
-              </div>
+    <section class="shop_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>
+                    Products
+                </h2>
             </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Welcome To Our <br>
-                      Gift Shop
-                    </h1>
-                    <p>
-                      Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.
-                    </p>
-                    <a href="">
-                      Contact Us
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-5 ">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="" />
-                  </div>
-                </div>
-              </div>
+            <div class="row">
+                @foreach ($products as $item)
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="box">
+                            <a href="{{url('/Product/Detail')}}/{{$item->id}}">
+                                <div class="img-box">
+                                    <img src="{{$item->image}}" alt="">
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        {{$item->name}}
+                                    </h6>
+                                    <h6>
+                                        Price
+                                        <span>
+                                            Rs {{$item->price}}
+                                        </span>
+                                    </h6>
+                                </div>
+                                <div class="new">
+                                    <span>
+                                        New
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Welcome To Our <br>
-                      Gift Shop
-                    </h1>
-                    <p>
-                      Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.
-                    </p>
-                    <a href="">
-                      Contact Us
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-5 ">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="carousel_btn-box">
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-          </a>
-          <img src="images/line.png" alt="" />
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-
+    <!-- end shop section -->
 @endsection
